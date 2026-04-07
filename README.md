@@ -1,2 +1,2 @@
-# MVC-PHP
-PHP MVC Framework built from scratch
+# PHP MVC Framework 
+MVC Framework from scratch using PHP
