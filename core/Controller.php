@@ -3,7 +3,7 @@
 
     abstract class Controller {
         protected Request $request;
-        protected Response $reponse;
+        protected Response $response;
 
         public function __construct(Request $request, Response $response) {
             $this->request = $request;
@@ -30,7 +30,7 @@
             ob_start();
             $viewFile = BASE_PATH . '/app/Views/{$view}.php';
             if (!file_exists($viewFile)) {
-                throw new \RuntimeException("View not found: {view}", 500);
+                throw new \RuntimeException("View not found: {$view}", 500);
             }
             require $viewFile;
             $content = ob_get_clean();

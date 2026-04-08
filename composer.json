@@ -1,0 +1,18 @@
+{
+    "name": "myapp/mvc-framework",
+    "description": "Custom PHP MVC framework",
+    "type": "project",
+    "require": {
+        "php": ">=8.1",
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/",
+            "App\\":  "app/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": []
+    }
+}
