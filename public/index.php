@@ -8,7 +8,7 @@
     require_once BASE_PATH . '/vendor/autoload.php';
 
     // Load environment variables 
-    $dotenv = Dotent\Dotenv::createImmutable(BASE_PATH);
+    $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
     $dotenv->safeLoad();
 
     // Load helpers
@@ -17,3 +17,4 @@
     $app = new Core\App();
     $app->run();
 ?>
+
