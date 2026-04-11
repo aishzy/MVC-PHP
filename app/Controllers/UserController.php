@@ -1,5 +1,4 @@
-<?php
-
+<?php 
     namespace App\Controllers;
 
     use App\Models\User;
@@ -15,7 +14,7 @@
             $this->userModel = new User();
         }
 
-        /** GET /Users */
+        /** GET /users */
         public function index(): void {
             $page = (int)$this->request->get('page', 1);
             $users = $this->userModel->paginate($page, 10);
@@ -26,21 +25,10 @@
             ]);
         }
 
-        /** GET /Users/{id} */
-        public function show(): void {
-            $id = $this->request->param('id');
-            $user = $this->userModel->findOrFail($id);
-
-            $this->view('users/show', [
-                'title' => 'User: ' . e($user['name']),
-                'user' => $user,
-            ]);
-        }
-
         /** GET /users/create */
         public function create(): void {
             $this->view('users/form', [
-                'title' => 'Create User',
+                'title' => 'Create Users', 
                 'user' => [],
                 'errors' => Session::getFlash('errors', []),
                 'old' => Session::getFlash('old', []),
@@ -61,8 +49,8 @@
                 Session::flash('old', $data);
                 $this->redirect('/users/create');
             }
-    
-            // Check unique email 
+
+            // Check unique email
             if ($this->userModel->findByEmail($data['email'])) {
                 Session::flash('errors', ['email' => ['That email is already taken.']]);
                 Session::flash('old', $data);
@@ -70,7 +58,7 @@
             }
 
             $this->userModel->create($data);
-            Session::flash('success', 'User created successfully.');
+            Session::flash('success', 'User Created successfully.');
             $this->redirect('/users');
         }
 
@@ -92,6 +80,19 @@
             $id = $this->request->param('id');
             $data = $this->request->only(['name', 'email']);
             $validator = new Validator();
+
+            if (!$validator->validate($data, [
+                'name' => 'required|min:2|max:100',
+                'email' => 'required|email',
+            ])) {
+                Session::flash('errors', $validator->errors());
+                Session::flash('old', $data);
+                $this->redirect("/users/{$id}/edit");
+            }
+
+            $this->userModel->update($id, $data);
+            Session::flash('success', 'User updated successfully.');
+            $this->redirect("/users/{$id}");
         }
 
         /** GET /users/{id}/delete */

@@ -52,6 +52,14 @@
             );
         }
 
+        public function delete(int|string $id): int {
+            return $this->db->delete(
+                $this->table, 
+                "{$this->primaryKey} = ?",
+                [$id]
+            );
+        }
+
         public function where(string $column, mixed $value): array {
             return $this->db->fetchAll(
                 "SELECT * FROM {$this->table} WHERE {$column} = ?",
