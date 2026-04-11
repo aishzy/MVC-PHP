@@ -77,7 +77,7 @@
         /** GET /users/{id}/edit */
         public function edit(): void {
             $id = $this->request->param('id');
-            $user = $this->userModel->findOrfail($id);
+            $user = $this->userModel->findOrFail($id);
 
             $this->view('users/form', [
                 'title' => 'Edit User',
