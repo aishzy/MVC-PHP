@@ -1,12 +1,7 @@
 <?php
-    /**
-     * Core Framework
-     */
-
     namespace Core;
 
     class App {
-
         private Router $router;
         private array $config;
 
@@ -15,39 +10,35 @@
             date_default_timezone_set($this->config['timezone']);
 
             if ($this->config['debug']) {
-                ini_set('display_errors', '1');
+                ini_set('display_errors', 1);
                 error_reporting(E_ALL);
             }
-
-            session::start();
+            Session::start();
             $this->router = new Router();
         }
 
         public function run(): void {
-            // Register routes
             $router = $this->router;
             require_once BASE_PATH . '/routes.php';
 
-            // Dispatch current request 
             $request = new Request();
             $response = new Response();
 
             try {
                 $this->router->dispatch($request, $response);
-            }
-            catch (\Exception $e) {
-                $this->handleException($e, $response);
+            } catch(\Exception $e) {
+                $this->handleException($e, $request, $response);
             }
         }
 
-        private function handleException(\Exception $e, Response $response): void {
-            
+        private function handleException(\Exception $e, Request $request, Response $response): void {
             $code = $e->getCode() ?: 500;
             $response->setStatusCode($code);
 
-            $controller = new \App\Controllers\ErrorController();
-            $method = $code === 404 ? 'notFound' : 'serverError';
+            $controller = new \App\Controllers\ErrorController($request, $response);
+            $method = $code === 404 ? 'NotFound' : 'ServerError';
             $controller->$method($e->getMessage());
         }
+
     }
 ?>

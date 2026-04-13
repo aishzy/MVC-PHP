@@ -30,7 +30,7 @@
                 'method' => $method,
                 'path' => $path,
                 'pattern' => $this->pathToRegex($path),
-                'controller' => 'App\\Controllers\{$controllerClass}',
+                'controller' => "App\\Controllers\\{$controllerClass}",
                 'action' => $action,
             ];
         }
