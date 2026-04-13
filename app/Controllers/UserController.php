@@ -57,6 +57,8 @@
                 $this->redirect('/users/create');
             }
 
+            // Hash the password before saving
+            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
             $this->userModel->create($data);
             Session::flash('success', 'User Created successfully.');
             $this->redirect('/users');

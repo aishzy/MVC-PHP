@@ -14,13 +14,13 @@
 
                 foreach ($ruleList as $rule) {
                     [$ruleName, $param] = array_pad(explode(':', $rule, 2), 2, null);
-                    $this->applyRule($field, $value, $ruleName, $param);
+                    $this->applyRule($field, $value, $ruleName, $param, $data);
                 }
             }
             return empty($this->errors);
         }
 
-        public function applyRule (string $field, mixed $value, string $rule, ?string $param): void {
+        public function applyRule (string $field, mixed $value, string $rule, ?string $param, array $data = []): void {
             switch ($rule) {
                 case 'required':
                     if ($value === null || $value === '') {
@@ -53,8 +53,10 @@
                     }
                     break;
                 case 'confirmed':
-                    // Expects a matching "{$field}_confirmation" key in the same data
-                    // (pass full $data via constructor or use a separate method if needed)
+                    $confirmationField = "{$field}_confirmation";
+                    if (($data[$confirmationField] ?? null) !== $value) {
+                        $this->errors[$field][] = "{$field} confirmation does not match.";
+                    }
                     break;
             }
         }

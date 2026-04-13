@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e($title ?? 'App') ?> - <?=  e(config('app', 'name')) ?>?>?></title>
+    <title><?= e($title ?? 'App') ?> - <?= e(config('app', 'name')) ?></title>
     <link rel="stylesheet" href="/public/css/app.css">
 </head>
 <body>
@@ -29,7 +29,7 @@
     </main>
 
     <footer>
-        <p>&copy; <?= date('Y') ?> <?= e($config('app', 'name')) ?></p>
+        <p>&copy; <?= date('Y') ?> <?= e(config('app', 'name')) ?></p>
     </footer>
 
     <script src="/public/js/app.js"></script>

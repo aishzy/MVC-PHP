@@ -55,7 +55,7 @@
 
     if (!function_exists('redirect')) {
         function redirect(string $url): never {
-            header('LocationL {$url}');
+            header("Location: {$url}");
             exit;
         }
     }
@@ -63,8 +63,8 @@
     if (!function_exists('config')) {
         function config(string $file, string $key = ''): mixed {
             static $cache = [];
-            if (isset($cache[$file])) {
-                $cache[$file] = require BASE_PATH . '/config/{$file}.php';
+            if (!isset($cache[$file])) {
+                $cache[$file] = require BASE_PATH . "/config/{$file}.php";
             }
             if ($key === '') return $cache[$file];
             return $cache[$file][$key] ?? null;

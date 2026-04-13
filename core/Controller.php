@@ -39,7 +39,7 @@
             $content = ob_get_clean();
 
             // render layout with content injected 
-            $layoutFile = BASE_PATH . '/app/Views/layouts/{$layout}.php';
+            $layoutFile = BASE_PATH . "/app/Views/layouts/{$layout}.php";
             if (!file_exists($layoutFile)) {
                 echo $content;
                 return;

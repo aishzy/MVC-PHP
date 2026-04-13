@@ -11,7 +11,7 @@
             $config = require BASE_PATH . '/config/database.php';
 
             $dsn = sprintf(
-                '%s:host=%s;port=%s;dname=%s;charset=%s',
+                '%s:host=%s;port=%s;dbname=%s;charset=%s',
                 $config['driver'],
                 $config['host'],
                 $config['port'],
@@ -60,8 +60,8 @@
         }
 
         public function update(string $table, array $data, string $where, array $whereParams = []): int {
-            $set = implode(', ', array_map(fn($col) => '{$col} = ?', array_keys($data)));
-            $params = array_merge(array_values($data, $whereParams));
+            $set = implode(', ', array_map(fn($col) => "{$col} = ?", array_keys($data)));
+            $params = array_merge(array_values($data), $whereParams);
             return $this->query("UPDATE {$table} SET {$set} WHERE {$where}", $params)->rowCount();
         }
 

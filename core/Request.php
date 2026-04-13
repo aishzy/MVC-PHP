@@ -29,12 +29,12 @@
         }
 
         public function isAjax(): bool {
-            return ($_SERVER['HTTP_X_REQUESTED_WItH'] ?? '') === 'XMLHttpRequest'; 
+            return ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'XMLHttpRequest'; 
         }
 
         // Input 
         public function get(string $key, mixed $default = null): mixed {
-            return $_GeT[$key] ?? $default;
+            return $_GET[$key] ?? $default;
         }
 
         public function post(string $key, mixed $default = null): mixed {

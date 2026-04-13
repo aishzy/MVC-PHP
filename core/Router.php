@@ -57,7 +57,7 @@
                 $controller->$action();
                 return;
             }
-            throw new \RuntimeException("Route not found: {$uri}", 403);
+            throw new \RuntimeException("Route not found: {$uri}", 404);
         }
 
         // Helpers 
