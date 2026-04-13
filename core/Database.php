@@ -86,7 +86,7 @@
 
         }
 
-        private function __wakeup(): never {
+        public function __wakeup(): never {
             throw new \RuntimeException("Cannot unserialize singleton.");
         }
     }

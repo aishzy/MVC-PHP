@@ -12,10 +12,10 @@
 
         public function serverError(string $message = 'Internal server error'): void {
             $debug = filter_var($_ENV['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN);
-            $this->view('errors/500', [
-                'title' => '500 Server Error',
+            $this->view("errors/500", [
+                'title' => "500 Server Error",
                 'message' => $debug ? $message : 'Something went wrong.',
-            ], 'main');
+            ], "main");
         }
     }
 ?>

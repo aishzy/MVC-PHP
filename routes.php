@@ -6,7 +6,7 @@
     $router->get('/', 'HomeController@index');
     $router->get('/about', 'HomeController@about');
 
-    // Users (Full CRUD)
+    // Users (Full CRUD) - Create, Read, Update, Delete
      $router->get('/users', 'UserController@index');
      $router->get('/users/create', 'UserController@create');
      $router->post('/users', 'UserController@store');

@@ -28,9 +28,12 @@
 
             // capture view content 
             ob_start();
-            $viewFile = BASE_PATH . '/app/Views/{$view}.php';
+            $viewFile = BASE_PATH . "/app/views/{$view}.php";
             if (!file_exists($viewFile)) {
-                throw new \RuntimeException("View not found: {$view}", 500);
+                /** 
+                 * Fatal Error: Uncaught RuntimeException: View not found 
+                 */
+                throw new \RuntimeException("View not found: {$view}", 500); // Error: line 33
             }
             require $viewFile;
             $content = ob_get_clean();
